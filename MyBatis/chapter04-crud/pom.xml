@@ -2,10 +2,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.zzb.learn</groupId>
-    <artifactId>chapter02-primary2</artifactId>
+    <artifactId>chapter04-crud</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
-    <name>chapter02</name>
+    <name>chapter04</name>
     <url>http://maven.apache.org</url>
     <properties>
         <slf4j.version>1.7.5</slf4j.version>
