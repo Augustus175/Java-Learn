@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -112,12 +113,34 @@ public class StudentDaoImpl implements IStudentDao {
     }
 
     @Override
-    public List<Student> selectStudent(String name) {
-        return null;
+    public List<Student> selectStudentByName(String name) {
+        List<Student> students = null;
+        try {
+            inputStream = Resources.getResourceAsStream("mybatis.xml");
+            sqlSession = MyBatisUtil.getSqlSession();
+            students = sqlSession.selectList("selectStudentByName", name);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (sqlSession != null) {
+            sqlSession.close();
+        }
+        return students;
     }
 
     @Override
-    public Map<String, Student> selectStudentMap(String name) {
-        return null;
+    public Map<String, Student> selectStudentMap() {
+        Map<String, Student> map = new HashMap<>();
+        try {
+            inputStream = Resources.getResourceAsStream("mybatis.xml");
+            sqlSession = MyBatisUtil.getSqlSession();
+            map = sqlSession.selectMap("selectAllStudents", "name");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        if (sqlSession != null) {
+            sqlSession.close();
+        }
+        return map;
     }
 }

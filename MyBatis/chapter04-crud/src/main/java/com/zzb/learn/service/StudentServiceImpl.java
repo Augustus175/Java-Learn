@@ -46,12 +46,12 @@ public class StudentServiceImpl implements IStudentService {
     }
 
     @Override
-    public List<Student> findStudent(String name) {
-        return dao.selectStudent(name);
+    public List<Student> findStudentByName(String name) {
+        return dao.selectStudentByName(name);
     }
 
     @Override
-    public Map<String, Student> findStudentMap(String name) {
-        return dao.selectStudentMap(name);
+    public Map<String, Student> findStudentMap() {
+        return dao.selectStudentMap();
     }
 }

@@ -41,8 +41,8 @@ public class Mytest {
 
     @Test
     public void test4() {
-        Student student = new Student("张三", 23, 98.3);
-        student.setId(15);
+        Student student = new Student("张三", 21, 98.3);
+        student.setId(1);
         service.modifyStudent(student);
     }
 
@@ -57,7 +57,7 @@ public class Mytest {
 
     @Test
     public void test6() {
-        Student student = service.findStudentById(15);
+        Student student = service.findStudentById(1);
         System.out.println(student);
     }
 
@@ -68,10 +68,5 @@ public class Mytest {
                 students) {
             System.out.println(student);
         }
-    }
-    @Test
-    public void test8() {
-        Map<String,Student> map = service.findStudentMap();
-        System.out.println(map.get("李四"));
     }
 }

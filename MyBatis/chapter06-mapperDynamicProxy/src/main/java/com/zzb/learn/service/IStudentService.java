@@ -19,6 +19,4 @@ public interface IStudentService {
     Student findStudentById(Integer id);
 
     List<Student> findStudentByName(String name);
-
-    Map<String, Student> findStudentMap();
 }
