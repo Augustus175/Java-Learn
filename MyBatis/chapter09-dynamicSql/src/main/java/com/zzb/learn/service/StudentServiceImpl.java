@@ -35,7 +35,7 @@ public class StudentServiceImpl implements IStudentService {
 
     @Override
     public List<Student> findStudentsByCondition(Student student) {
-        return dao.selectStudentsByCondition(student);
+        return dao.selectStudentsByConditionIf(student);
     }
 
 }
