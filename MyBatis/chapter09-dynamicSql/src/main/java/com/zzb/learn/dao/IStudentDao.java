@@ -13,5 +13,14 @@ public interface IStudentDao {
 
     List<Student> selectStudentsByConditionWhere(Student student);
 
+    List<Student> selectStudentsByConditionChoose(Student student);
+
+    List<Student> selectStudentsByConditionForeach(int[] ids);
+
+    List<Student> selectStudentsByConditionForeach2(List<Integer> ids);
+
+    List<Student> selectStudentsByConditionForeach3(List<Student> students);
+
+    List<Student> selectStudentsByConditionFragment(List<Student> students);
 
 }

@@ -32,4 +32,66 @@
             <!--select * from student where name like '%${value}%';-->
         </where>
     </select>
+
+    <select id="selectStudentsByConditionChoose" resultType="Student">
+        select * from student
+        <where>
+            <choose>
+                <when test="name != null and name !='' ">
+                    and name like '%' #{name} '%'
+                </when>
+                <when test="age > 0">
+                    and age > #{age};
+                </when>
+                <!--         select * from student where name like concat('%',#{name},'%');-->
+                <!--select * from student where name like '%${value}%';-->
+                <otherwise>
+                    and 1 !=1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <select id="selectStudentsByConditionForeach" resultType="Student">
+        select * from student
+        <if test="array.length > 0">
+            where id in
+            <foreach collection="array" open="(" close=")" separator="," item="myid">
+                #{myid}
+            </foreach>
+        </if>
+    </select>
+
+    <select id="selectStudentsByConditionForeach2" resultType="Student">
+        select * from student
+        <if test="list.size > 0">
+            where id in
+            <foreach collection="list" open="(" close=")" separator="," item="myid">
+                #{myid}
+            </foreach>
+        </if>
+    </select>
+    <select id="selectStudentsByConditionForeach3" resultType="Student">
+        select * from student
+        <if test="list.size > 0">
+            where id in
+            <foreach collection="list" open="(" close=")" separator="," item="myStudent">
+                #{myStudent.id}
+            </foreach>
+        </if>
+    </select>
+    <select id="selectStudentsByConditionFragment" resultType="Student">
+        select
+        <include refid="selectHead"/>
+        from student
+        <if test="list.size > 0">
+            where id in
+            <foreach collection="list" open="(" close=")" separator="," item="myStudent">
+                #{myStudent.id}
+            </foreach>
+        </if>
+    </select>
+    <sql id="selectHead">
+       id,name,age,score
+    </sql>
 </mapper>
