@@ -1,11 +1,11 @@
 package com.zzb.learn.bean;
 
-import java.util.List;
+import java.util.Set;
 
 public class Country {
     private int cid;
     private String cname;
-    private List<Minister> ministers;
+    private Set<Minister> ministers;
 
     public int getCid() {
         return cid;
@@ -23,11 +23,11 @@ public class Country {
         this.cname = cname;
     }
 
-    public List<Minister> getMinisters() {
+    public Set<Minister> getMinisters() {
         return ministers;
     }
 
-    public void setMinisters(List<Minister> ministers) {
+    public void setMinisters(Set<Minister> ministers) {
         this.ministers = ministers;
     }
 

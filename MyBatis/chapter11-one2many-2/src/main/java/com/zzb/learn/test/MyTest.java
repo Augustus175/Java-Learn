@@ -26,7 +26,8 @@ public class MyTest {
 
     @Test
     public void test1() {
-       Country country = dao.selectCountryById(1);
-        System.out.println(country);
+        Country country = dao.selectCountryById(2);
+        System.out.println(country.getCid());
+        System.out.println(country.getMinisters());
     }
 }

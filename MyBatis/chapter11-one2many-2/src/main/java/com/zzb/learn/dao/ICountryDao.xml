@@ -2,11 +2,15 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.zzb.learn.dao.ICountryDao">
+
     <select id="selectMinisterByCountryId" resultType="Minister">
-           select mid,mname,countryId from minister where id = #{cid}
+        select mid,mname,countryId from minister where countryId = #{cid}
     </select>
-    <resultMap id="countryMapper" type="Country">
+
+
+    <resultMap  id="countryMapper" type="Country">
         <id column="cid" property="cid"/>
         <result column="cname" property="cname"/>
         <collection property="ministers"
@@ -15,9 +19,10 @@
                     column="cid">
         </collection>
     </resultMap>
+
     <select id="selectCountryById" resultMap="countryMapper">
-           select cid,cname,mid,mname
-           from country,minister
-           where countryId = cid and cid = #{cid}
+           select cid,cname
+           from country
+           where cid = #{cid}
     </select>
 </mapper>
