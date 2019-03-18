@@ -1,4 +1,4 @@
-package com.zzb.learn.service01;
+package com.zzb.learn.service02;
 
 
 public class SomeServiceImpl implements ISomeService {

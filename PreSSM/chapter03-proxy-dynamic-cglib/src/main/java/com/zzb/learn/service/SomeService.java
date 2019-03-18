@@ -1,4 +1,4 @@
-package com.zzb.learn.service;
+package com.zzb.learn.service01;
 
 public class SomeService {
     public void doFirst() {

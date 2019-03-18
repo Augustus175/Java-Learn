@@ -1,4 +1,4 @@
-package com.zzb.learn.service;
+package com.zzb.learn.service02;
 
 
 public interface ISomeService {

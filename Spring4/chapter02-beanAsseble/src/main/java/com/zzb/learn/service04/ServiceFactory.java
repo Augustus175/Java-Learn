@@ -1,4 +1,4 @@
-package com.zzb.learn.service;
+package com.zzb.learn.service04;
 
 public class ServiceFactory {
     public SomeServiceImpl getSomeService() {

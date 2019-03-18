@@ -1,4 +1,4 @@
-package com.zzb.learn.service;
+package com.zzb.learn.service01;
 
 import com.zzb.learn.bean.Student;
 import com.zzb.learn.dao.IStudentDao;

@@ -1,6 +1,6 @@
 package com.zzb.learn.factory;
 
-import com.zzb.learn.service.SomeService;
+import com.zzb.learn.service01.SomeService;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;

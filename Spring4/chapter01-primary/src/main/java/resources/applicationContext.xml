@@ -4,6 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="someServiceImpl" class="com.zzb.learn.service.SomeServiceImpl"></bean>
+    <bean id="someServiceImpl" class="com.zzb.learn.service01.SomeServiceImpl"></bean>
 
 </beans>

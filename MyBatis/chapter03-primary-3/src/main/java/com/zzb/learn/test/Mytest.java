@@ -2,8 +2,8 @@ package com.zzb.learn.test;
 
 
 import com.zzb.learn.bean.Student;
-import com.zzb.learn.service.IStudentService;
-import com.zzb.learn.service.StudentServiceImpl;
+import com.zzb.learn.service01.IStudentService;
+import com.zzb.learn.service01.StudentServiceImpl;
 import org.testng.annotations.Test;
 
 

@@ -1,8 +1,8 @@
 package com.zzb.learn.test;
 
 
-import com.zzb.learn.service.ISomeService;
-import com.zzb.learn.service.SomeServiceImpl;
+import com.zzb.learn.service01.ISomeService;
+import com.zzb.learn.service01.SomeServiceImpl;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanFactory;
 import org.springframework.context.ApplicationContext;

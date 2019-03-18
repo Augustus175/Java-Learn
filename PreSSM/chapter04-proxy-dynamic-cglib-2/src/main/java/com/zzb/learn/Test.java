@@ -1,7 +1,7 @@
 package com.zzb.learn;
 
 import com.zzb.learn.factory.CglibProxyFactory;
-import com.zzb.learn.service.ISomeService;
+import com.zzb.learn.service01.ISomeService;
 
 public class Test {
     public static void main(String[] args) {

@@ -4,7 +4,7 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="serviceFactory" class="com.zzb.learn.service.ServiceFactory"></bean>
+    <bean id="serviceFactory" class="com.zzb.learn.service01.ServiceFactory"></bean>
     <bean id="someService" factory-bean="serviceFactory" factory-method="getSomeService"></bean>
 
 

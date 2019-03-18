@@ -1,18 +1,19 @@
 package com.zzb.learn.test;
 
 
-import com.zzb.learn.service01.ISomeService;
-import com.zzb.learn.service01.SomeServiceImpl;
+import com.zzb.learn.service04.ISomeService;
+import com.zzb.learn.service04.SomeServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.annotations.Test;
 
 
-public class Mytest {
+public class Mytest4 {
+
 
     @Test
-    public void test1() {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("com/zzb/learn/service01/applicationContext.xml");
+    public void test4() {
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("com/zzb/learn/service04/applicationContext.xml");
         ISomeService someService = (SomeServiceImpl) applicationContext.getBean("someService");
         someService.doSomething();
     }

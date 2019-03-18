@@ -1,7 +1,7 @@
 package com.zzb.learn.test;
 
-import com.zzb.learn.service.ClothShopping;
-import com.zzb.learn.service.Shopping;
+import com.zzb.learn.service01.ClothShopping;
+import com.zzb.learn.service01.Shopping;
 
 public class MyTest {
 
