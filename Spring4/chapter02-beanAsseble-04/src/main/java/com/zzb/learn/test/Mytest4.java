@@ -13,8 +13,9 @@ public class Mytest4 {
 
     @Test
     public void test4() {
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("com/zzb/learn/service04/applicationContext.xml");
-        ISomeService someService = (SomeServiceImpl) applicationContext.getBean("someService");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ISomeService someService = (ISomeService) applicationContext.getBean("someService");
+//        SomeServiceImpl someService = (SomeServiceImpl) applicationContext.getBean("someService");
         someService.doSomething();
     }
 }

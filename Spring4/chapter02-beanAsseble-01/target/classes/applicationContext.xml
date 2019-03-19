@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- 注册静态工厂Bean -->
+    <bean id="someService" class="com.zzb.learn.service.SomeServiceImpl"/>
+    <!-- 注册Bean后处理器 -->
+    <bean class="com.zzb.learn.service.MyBeanPostProcessor"/>
+
+    <!-- 注册bean后处理器 -->
+    <!--<bean class="com.bjpowernode.ba04.MyBeanPostProcessor"/>-->
+
+</beans>
