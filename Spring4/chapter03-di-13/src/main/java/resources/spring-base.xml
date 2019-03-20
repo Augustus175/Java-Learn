@@ -5,12 +5,8 @@
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <!-- 注册静态工厂Bean -->
-    <bean id="someService" class="com.zzb.learn.service.SomeServiceImpl"/>
-    <!-- 注册Bean后处理器 -->
-    <bean class="com.zzb.learn.service.MyBeanPostProcessor"/>
 
-    <!-- 注册bean后处理器 -->
-    <!--<bean class="com.com.bjpowernode.ba04.MyBeanPostProcessor"/>-->
-
+    <bean id="mybase" abstract="true">
+        <property name="school" value="qinghua"/>
+    </bean>
 </beans>
