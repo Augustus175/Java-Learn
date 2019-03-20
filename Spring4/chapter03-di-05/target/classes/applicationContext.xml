@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <bean id="school1" class="com.zzb.learn.dao.School">
+        <property name="name" value="Qinghua"/>
+    </bean>
+    <bean id="school2" class="com.zzb.learn.dao.School">
+        <property name="name" value="Beida"/>
+    </bean>
+    <bean id="mySome" class="com.zzb.learn.dao.Some">
+        <property name="schools">
+            <array>
+                <ref bean="school1"/>
+                <ref bean="school2"/>
+            </array>
+        </property>
+        <property name="strings">
+            <array>
+                <value>zhongguo</value>
+                <value>beijing</value>
+            </array>
+        </property>
+        <property name="myList">
+            <list>
+                <value>daxing</value>
+                <value>cangping</value>
+            </list>
+        </property>
+        <property name="mySet">
+            <set>
+                <value>yuxin</value>
+                <value>huoying</value>
+            </set>
+        </property>
+        <property name="myMap">
+            <map>
+                <entry key="mobil" value="12345678"/>
+                <entry key="qq" value="87654321"/>
+            </map>
+        </property>
+        <property name="myPros">
+            <props>
+                <prop key="pname">zhangsan</prop>
+                <prop key="page">23</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>
