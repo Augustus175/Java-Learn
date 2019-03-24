@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans 
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<!-- 
+	<import resource="classpath:com/com.bjpowernode/di14/spring-base.xml"/>
+	<import resource="classpath:com/com.bjpowernode/di14/spring-beans.xml"/>
+	 -->
+	 <!-- 注意，在使用通配符的情况下，总的配置文件命名格式，不要与子配置文件相同 -->
+	<import resource="classpath:com/bjpowernode/di14/spring-*.xml"/>
+</beans>
+	<import resource="calsspath:com.com.bjpowernode.">
+
+	
+	
+	
