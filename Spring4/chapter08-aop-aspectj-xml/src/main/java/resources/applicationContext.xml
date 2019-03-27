@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!-- bean definitions here -->
+    <bean id="someService" class="com.zzb.learn.service.SomeServiceImpl"/>
+    <bean id="myAspect" class="com.zzb.learn.service.MyAspect"/>
+    <aop:config>
+        <aop:pointcut id="somePoinCut" expression="execution(* *..ISomeService.doSomething(..))"/>
+        <aop:aspect ref="myAspect">
+            <aop:before method="myBefore" pointcut-ref="somePoinCut"/>
+            <aop:before method="myBefore(org.aspectj.lang.JoinPoint)"
+                        pointcut="execution(* *..ISomeService.doSomething(..))"/>
+            <aop:after-returning method="myAfterReturning(java.lang.Object)" returning="result"
+                                 pointcut-ref="somePoinCut"/>
+            <aop:after method="myAfterReturning()" pointcut-ref="somePoinCut"/>
+        </aop:aspect>
+    </aop:config>
+</beans>

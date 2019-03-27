@@ -6,23 +6,28 @@ import org.aspectj.lang.annotation.*;
 
 @Aspect
 public class MyAspect {
-    @Before("execution(* *..ISomeService.doSomething(..))")
+    //    @Before("execution(* *..ISomeService.doSomething(..))")
     public void myBefore() {
         System.out.println("#runing the before()#");
     }
 
-    @Before("execution(* *..ISomeService.doSomething(..))")
+    //    @Before("execution(* *..ISomeService.doSomething(..))")
+
     public void myBefore(JoinPoint jp) {
         System.out.println("#runing the before(joinPoint) " + jp + "#");
     }
 
-    @AfterReturning(value = "execution(* *..ISomeService.doSomething(..))", returning = "result")
-    public String myAfterReturning(String result) {
+    //    @AfterReturning(value = "execution(* *..ISomeService.doSomething(..))", returning = "result")
+    public String myAfterReturning(Object result) {
         System.out.println("#runing the afterReturning#");
-        return result.toUpperCase();
+        return ((String) result).toUpperCase();
     }
 
-    @Around("myPoinCut()")
+    public void myAfterReturning() {
+        System.out.println("#runing the afterReturning without args#");
+    }
+
+    //    @Around("myPoinCut()")
     public Object myAround(ProceedingJoinPoint pjp) throws Throwable {
         System.out.println("run myAround before");
         Object proceed = pjp.proceed();
@@ -33,12 +38,12 @@ public class MyAspect {
         return proceed;
     }
 
-    @AfterThrowing(value = "execution(* *..ISomeService.doFourth(..))")
+    //    @AfterThrowing(value = "execution(* *..ISomeService.doFourth(..))")
     public void afterThrowing() {
         System.out.println("run afterThrowing");
     }
 
-    @Pointcut("execution(* *..ISomeService.doThird(..))")
+    //    @Pointcut("execution(* *..ISomeService.doThird(..))")
     private void myPoinCut() {
     }
 }
