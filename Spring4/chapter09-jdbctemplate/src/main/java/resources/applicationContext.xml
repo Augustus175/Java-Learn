@@ -1,28 +1,31 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
         http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
-        http://www.springframework.org/schema/aop
-        http://www.springframework.org/schema/aop/spring-aop.xsd">
-
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
     <!-- bean definitions here -->
-    <bean id="someService" class="com.zzb.learn.service.SomeServiceImpl"/>
-    <bean id="myAspect" class="com.zzb.learn.service.MyAspect"/>
-    <aop:config>
-        <aop:pointcut id="somePoinCut" expression="execution(* *..ISomeService.doSomething(..))"/>
-        <aop:pointcut id="somePointCutOnFourth" expression="execution(* *..ISomeService.doFourth(..))"/>
-        <aop:aspect ref="myAspect">
-            <aop:before method="myBefore" pointcut-ref="somePoinCut"/>
-            <aop:before method="myBefore(org.aspectj.lang.JoinPoint)"
-                        pointcut="execution(* *..ISomeService.doSomething(..))"/>
-            <aop:after-returning method="myAfterReturning(java.lang.Object)" returning="result"
-                                 pointcut-ref="somePoinCut"/>
-            <aop:after method="myAfterReturning()" pointcut-ref="somePoinCut"/>
-            <aop:around method="myAround" pointcut-ref="somePoinCut"/>
-            <aop:after-throwing method="afterThrowing" pointcut-ref="somePointCutOnFourth"/>
-            <aop:after-throwing method="afterThrowing(java.lang.Exception)" throwing="ex" pointcut-ref="somePointCutOnFourth"/>
-        </aop:aspect>
-    </aop:config>
+    <context:property-placeholder location="mysql_jdbc.properties.properties"/>
+    <bean id="myDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <!--<property name="driverClassName" value="com.mysql.jdbc.Driver"/>-->
+        <!--<property name="url" value="jdbc:mysql://127.0.0.1:3306/oa?useUnicode=true&amp;characterEncoding=UTF-8"/>-->
+        <!--<property name="username" value="root"/>-->
+        <!--<property name="password" value="123456"/>-->
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="myDataSource"/>
+    </bean>
+    <bean id="studentDao" class="com.zzb.learn.dao.StudentDaoImpl">
+        <property name="jdbcTemplate" ref="jdbcTemplate"/>
+    </bean>
+
+    <bean id="studentService" class="com.zzb.learn.service.StudentServiceImpl">
+        <property name="dao" ref="studentDao"/>
+    </bean>
 </beans>

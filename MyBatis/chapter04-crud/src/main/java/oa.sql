@@ -36,6 +36,6 @@ CREATE TABLE `student`  (
 -- ----------------------------
 INSERT INTO `student` VALUES (1, '张三', 23, 92.2);
 INSERT INTO `student` VALUES (2, '李四', 24, 93.4);
-INSERT INTO `student` VALUES (3, ' 王五', 24, 94.3);
+INSERT INTO `student` VALUES (3, '王五', 24, 94.3);
 
 SET FOREIGN_KEY_CHECKS = 1;
