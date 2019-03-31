@@ -3,6 +3,7 @@ package com.zzb.learn.dao;
 import com.zzb.learn.beans.Student;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -48,18 +49,8 @@ public class StudentDaoImpl extends JdbcDaoSupport implements IStudentDao {
 
     @Override
     public List<Student> selectAllStudents() {
-        List<Student> students = null;
-//        try {
-//            inputStream = Resources.getResourceAsStream("mybatis.xml");
-//            sqlSession = MyBatisUtil.getSqlSession();
-//            students = sqlSession.selectList("selectAllStudents");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        if (sqlSession != null) {
-//            sqlSession.close();
-//        }
-        return students;
+        String sql = " select id ,name, age from student ";
+        return this.getJdbcTemplate().query(sql, new StudentRowMapper());
     }
 
     @Override

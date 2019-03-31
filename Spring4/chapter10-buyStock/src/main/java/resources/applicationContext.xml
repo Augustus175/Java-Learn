@@ -9,26 +9,20 @@
     <!-- bean definitions here -->
     <context:property-placeholder location="mysql_jdbc.properties.properties"/>
     <bean id="myDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <!--<property name="driverClassName" value="com.mysql.jdbc.Driver"/>-->
-        <!--<property name="url" value="jdbc:mysql://127.0.0.1:3306/oa?useUnicode=true&amp;characterEncoding=UTF-8"/>-->
-        <!--<property name="username" value="root"/>-->
-        <!--<property name="password" value="123456"/>-->
         <property name="driverClassName" value="${jdbc.driver}"/>
         <property name="url" value="${jdbc.url}"/>
         <property name="username" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
     </bean>
-    <!--<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
-    <!--<property name="dataSource" ref="myDataSource"/>-->
-    <!--</bean>-->
-    <!--<bean id="studentDao" class="com.zzb.learn.dao.StudentDaoImpl">-->
-    <!--<property name="jdbcTemplate" ref="jdbcTemplate"/>-->
-    <!--</bean>-->
-    <bean id="studentDao" class="com.zzb.learn.dao.StudentDaoImpl">
+    <bean id="accountDao" class="com.zzb.learn.dao.AccountDaoImpl">
+        <property name="dataSource" ref="myDataSource"/>
+    </bean>
+    <bean id="stockDap" class="com.zzb.learn.dao.StockDaoImpl">
         <property name="dataSource" ref="myDataSource"/>
     </bean>
 
-    <bean id="studentService" class="com.zzb.learn.service.StudentServiceImpl">
-        <property name="dao" ref="studentDao"/>
+    <bean id="buyStockService" class="com.zzb.learn.service.BuyStockServiceImpl">
+        <property name="accountDao" ref="accountDao"/>
+        <property name="stockDao" ref="stockDap"/>
     </bean>
 </beans>

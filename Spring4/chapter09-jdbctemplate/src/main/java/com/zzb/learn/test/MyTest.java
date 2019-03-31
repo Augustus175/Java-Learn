@@ -8,6 +8,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.util.List;
+
 
 public class MyTest {
 
@@ -20,8 +22,17 @@ public class MyTest {
     }
 
     @Test
-    public void test() {
-        Student  student = new Student("张三",23);
+    public void test1() {
+        Student student = new Student("张三", 23);
         studentService.saveStudent(student);
+    }
+
+    @Test
+    public void test2() {
+        List<Student> students = studentService.findAllStudents();
+        for (Student student :
+                students) {
+            System.out.println(student);
+        }
     }
 }
