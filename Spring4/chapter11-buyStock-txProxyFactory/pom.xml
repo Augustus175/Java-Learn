@@ -2,7 +2,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.zzb.learn</groupId>
-    <artifactId>chapter10-buyStock</artifactId>
+    <artifactId>chapter11-buyStock-txProxyFactory</artifactId>
     <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
     <name>chapter09</name>
