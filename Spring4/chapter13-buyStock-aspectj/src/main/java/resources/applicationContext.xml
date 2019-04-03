@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+        http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd">
+    <!-- bean definitions here -->
+    <context:property-placeholder location="mysql_jdbc.properties.properties"/>
+    <bean id="myDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driver}"/>
+        <property name="url" value="${jdbc.url}"/>
+        <property name="username" value="${jdbc.username}"/>
+        <property name="password" value="${jdbc.password}"/>
+    </bean>
+    <bean id="accountDao" class="com.zzb.learn.dao.AccountDaoImpl">
+        <property name="dataSource" ref="myDataSource"/>
+    </bean>
+    <bean id="stockDap" class="com.zzb.learn.dao.StockDaoImpl">
+        <property name="dataSource" ref="myDataSource"/>
+    </bean>
+
+    <bean id="buyStockService" class="com.zzb.learn.service.BuyStockServiceImpl">
+        <property name="accountDao" ref="accountDao"/>
+        <property name="stockDao" ref="stockDap"/>
+    </bean>
+
+    <bean id="myTransactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="myDataSource"/>
+    </bean>
+    <tx:advice id="txAdvice" transaction-manager="myTransactionManager">
+        <tx:attributes>
+            <tx:method name="open*" isolation="DEFAULT" propagation="REQUIRED"/>
+            <tx:method name="buyStock" isolation="DEFAULT" propagation="REQUIRED" rollback-for="BuyStockException"/>
+        </tx:attributes>
+    </tx:advice>
+    <aop:config>
+        <aop:pointcut id="buyStockPoinCut" expression="execution(* *..service.*.*(..))"/>
+        <aop:advisor advice-ref="txAdvice" pointcut-ref="buyStockPoinCut"/>
+    </aop:config>
+</beans>
