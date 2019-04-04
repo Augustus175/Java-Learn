@@ -8,24 +8,21 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
     <!-- bean definitions here -->
     <context:property-placeholder location="mysql_jdbc.properties.properties"/>
-    <bean id="myDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <!--<property name="driverClassName" value="com.mysql.jdbc.Driver"/>-->
-        <!--<property name="url" value="jdbc:mysql://127.0.0.1:3306/oa?useUnicode=true&amp;characterEncoding=UTF-8"/>-->
-        <!--<property name="username" value="root"/>-->
-        <!--<property name="password" value="123456"/>-->
-        <property name="driverClassName" value="${jdbc.driver}"/>
-        <property name="url" value="${jdbc.url}"/>
-        <property name="username" value="${jdbc.username}"/>
+    <bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+        <property name="driverClass" value="${jdbc.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.url}"/>
+        <property name="user" value="${jdbc.username}"/>
         <property name="password" value="${jdbc.password}"/>
     </bean>
-    <!--<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">-->
-    <!--<property name="dataSource" ref="myDataSource"/>-->
-    <!--</bean>-->
-    <!--<bean id="studentDao" class="com.zzb.learn.dao.StudentDaoImpl">-->
-    <!--<property name="jdbcTemplate" ref="jdbcTemplate"/>-->
-    <!--</bean>-->
-    <bean id="studentDao" class="com.zzb.learn.dao.StudentDaoImpl">
-        <property name="dataSource" ref="myDataSource"/>
+    <!--<bean id="mySqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">-->
+    <bean id="mySqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="configLocation" value="mybatis.xml"/>
+        <property name="dataSource" value="myDataSource"/>
+    </bean>
+
+    <bean id="studentDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
+        <property name="sqlSessionFactory" ref="mySqlSessionFactory"/>
+        <property name="mapperInterface" value="com.zzb.learn.dao.IStudentDao"/>
     </bean>
 
     <bean id="studentService" class="com.zzb.learn.service.StudentServiceImpl">
