@@ -23,7 +23,7 @@ public class MyTest {
 
     @Test
     public void test1() {
-        Student student = new Student("王二", 21);
+        Student student = new Student("李二", 21);
         studentService.saveStudent(student);
     }
 

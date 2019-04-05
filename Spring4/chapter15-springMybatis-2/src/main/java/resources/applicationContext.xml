@@ -20,12 +20,13 @@
         <property name="dataSource" ref="myDataSource"/>
     </bean>
 
-    <bean id="studentDao" class="org.mybatis.spring.mapper.MapperFactoryBean">
-        <property name="sqlSessionFactory" ref="mySqlSessionFactory"/>
-        <property name="mapperInterface" value="com.zzb.learn.dao.IStudentDao"/>
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="sqlSessionFactoryBeanName" value="mySqlSessionFactory"/>
+        <property name="basePackage" value="com.zzb.learn.dao"/>
     </bean>
 
     <bean id="studentService" class="com.zzb.learn.service.StudentServiceImpl">
-        <property name="dao" ref="studentDao"/>
+        <!--<property name="dao" ref="IStudentDao"/>-->
+        <property name="dao" ref="IStudentDao"/>
     </bean>
 </beans>
