@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zzb.learn.dao.IStudentDao">
+    <insert id="insertStudent" parameterType="Student">
+        insert  into student(name, age) values (#{name},#{age})
+    </insert>
+
+    <insert id="insertStudentCatchId" parameterType="Student">
+        insert into student(name, age) values (#{name},#{age})
+        <selectKey resultType="int" keyProperty="id" order="AFTER">
+            select @@identity;
+        </selectKey>
+    </insert>
+
+    <delete id="deleteStudentById" parameterType="Student">
+        delete from student where id = #{id}
+    </delete>
+
+    <update id="updateStudent">
+        update student set name=#{name},age=#{age} where id = #{id}
+    </update>
+
+    <select id="selectAllStudents" resultType="Student">
+        select * from student;
+    </select>
+
+
+    <select id="selectStudentById" resultType="Student">
+        select * from student where id = #{id};
+    </select>
+
+    <select id="selectStudentByName" resultType="Student">
+        select * from student where name like '%' #{name} '%';
+        <!--         select * from student where name like concat('%',#{name},'%');-->
+        <!--select * from student where name like '%${value}%';-->
+    </select>
+</mapper>
