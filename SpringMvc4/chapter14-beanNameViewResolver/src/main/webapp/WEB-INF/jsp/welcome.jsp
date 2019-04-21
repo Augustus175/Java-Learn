@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-message= ${message}<br>
+welcome page !
 </body>
 </html>
