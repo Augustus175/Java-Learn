@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-student= ${student}<br>
+name= ${param.name}<br>
+age= ${param.age}<br>
 </body>
 </html>

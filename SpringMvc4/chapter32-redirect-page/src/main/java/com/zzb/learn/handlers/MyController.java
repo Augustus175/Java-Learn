@@ -14,8 +14,9 @@ public class MyController {
     public ModelAndView doRegister(Student student) {
         ModelAndView modelAndView = new ModelAndView();
         System.out.println("student = " + student);
-        modelAndView.addObject("student", student);
-        modelAndView.setViewName("/WEB-INF/jsp/welcome.jsp");
+        modelAndView.addObject("name", student.getName());
+        modelAndView.addObject("age", student.getAge());
+        modelAndView.setViewName("redirect:/welcome.jsp");
         return modelAndView;
     }
 }
