@@ -1,0 +1,26 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+    <!-- bean definitions here -->
+    <!--<bean id="/my.do" class="com.zzb.learn.handlers.MyController"/>-->
+    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+    <!--<property name="prefix" value="/WEB-INF/jsp/"/>-->
+    <!--<property name="suffix" value=".jsp"/>-->
+    <!--</bean>-->
+    <context:component-scan base-package="com.zzb.learn.handlers"/>
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="defaultErrorView" value="/errorpages/errors.jsp"/>
+        <property name="exceptionAttribute" value="ex"/>
+        <property name="exceptionMappings">
+            <props>
+                <prop key="com.zzb.learn.exceptions.NameExceptions">/errorpages/nameErrors.jsp</prop>
+                <prop key="com.zzb.learn.exceptions.AgeExceptions">/errorpages/ageErrors.jsp</prop>
+            </props>
+        </property>
+    </bean>
+</beans>
