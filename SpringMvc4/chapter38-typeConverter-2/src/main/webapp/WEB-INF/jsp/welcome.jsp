@@ -11,7 +11,7 @@
     <title>Title</title>
 </head>
 <body>
-page= ${page}<br>
+age= ${age}<br>
 birthday=${birthday} <br>
 </body>
 </html>

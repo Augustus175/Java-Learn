@@ -1,5 +1,6 @@
 package com.zzb.learn.converters;
 
+import org.springframework.beans.TypeMismatchException;
 import org.springframework.core.convert.converter.Converter;
 
 import java.text.SimpleDateFormat;
@@ -28,6 +29,8 @@ public class MyDateConvert implements Converter<String, Date> {
         }
         if (Pattern.matches("^\\d{4}\\d{2}\\d{2}$", source)) {
             simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        }else {
+            throw new TypeMismatchException("",Date.class);
         }
         return simpleDateFormat;
     }
