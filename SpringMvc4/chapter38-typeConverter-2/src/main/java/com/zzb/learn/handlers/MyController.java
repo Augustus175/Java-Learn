@@ -32,6 +32,13 @@ public class MyController {
         ModelAndView modelAndView = new ModelAndView();
         String age = httpServletRequest.getParameter("age");
         String birthday = httpServletRequest.getParameter("birthday");
+        System.out.println(ex.getMessage());
+        if (ex.getMessage().contains(age)) {
+            modelAndView.addObject("ageError", "Error Age !");
+        }
+        if (ex.getMessage().contains(birthday)) {
+            modelAndView.addObject("birthdayError", "Error Birthday !");
+        }
         modelAndView.addObject("age", age);
         modelAndView.addObject("birthday", birthday);
         modelAndView.addObject("ex", ex);
