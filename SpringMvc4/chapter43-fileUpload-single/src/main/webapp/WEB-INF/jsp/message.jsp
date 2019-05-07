@@ -11,6 +11,6 @@
     <title>Title</title>
 </head>
 <body>
-student = ${student}<br>
+message = ${message}<br>
 </body>
 </html>
