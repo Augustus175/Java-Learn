@@ -10,4 +10,8 @@ public class StudentServiceImpl implements IStudentService {
     public void saveStudent(Student student) {
         studentDao.insertStudent(student);
     }
+
+    public void setStudentDao(IStudentDao studentDao) {
+        this.studentDao = studentDao;
+    }
 }

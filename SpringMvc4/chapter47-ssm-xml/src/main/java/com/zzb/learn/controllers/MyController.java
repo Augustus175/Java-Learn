@@ -19,4 +19,8 @@ public class MyController implements Controller {
         service.saveStudent(student);
         return null;
     }
+
+    public void setService(IStudentService service) {
+        this.service = service;
+    }
 }
