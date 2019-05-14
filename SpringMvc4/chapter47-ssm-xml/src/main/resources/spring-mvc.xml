@@ -15,7 +15,7 @@
         http://www.springframework.org/schema/tx/spring-tx.xsd
         http://www.springframework.org/schema/mvc
         http://www.springframework.org/schema/mvc/spring-mvc.xsd">
-    <bean id="/test/register.do" class="com.zzb.learn.controllers.MyController">
+    <bean id="/test/register.do" class="com.zzb.learn.handlers.MyController">
         <property name="service" ref="studentService"/>
     </bean>
 </beans>

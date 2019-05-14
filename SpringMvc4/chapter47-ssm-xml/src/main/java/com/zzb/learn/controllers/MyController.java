@@ -1,4 +1,4 @@
-package com.zzb.learn.controllers;
+package com.zzb.learn.handlers;
 
 import com.zzb.learn.beans.Student;
 import com.zzb.learn.services.IStudentService;
