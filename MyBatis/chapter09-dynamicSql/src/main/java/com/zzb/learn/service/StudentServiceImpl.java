@@ -1,4 +1,4 @@
-package com.zzb.learn.service01;
+package com.zzb.learn.service;
 
 import com.zzb.learn.bean.Student;
 import com.zzb.learn.dao.IStudentDao;
@@ -38,4 +38,8 @@ public class StudentServiceImpl implements IStudentService {
         return dao.selectStudentsByConditionIf(student);
     }
 
+    @Override
+    public List<Student> findStudentsByConditionWhere(Student student) {
+        return dao.selectStudentsByConditionWhere(student);
+    }
 }
