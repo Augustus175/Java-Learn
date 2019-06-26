@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<beans>
+    <bean id="empService" class="com.zzb.toy.service.EmpService"></bean>
+    <bean id="debtService" class="com.zzb.toy.service.DebtService"></bean>
+</beans>
