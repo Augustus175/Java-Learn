@@ -13,14 +13,16 @@ public class DeptAddAction extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         System.out.println("accept success !!");
 //        request.getParameter("")
+        String viewPath = null;
         BaseService baseService = null;
         try {
             baseService = ReflectUtil.createService(request);
+            ReflectUtil.initRequest(baseService, request);
+            viewPath = ReflectUtil.invoke(baseService, request);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        baseService.save();
-        request.getRequestDispatcher("/success.jsp");
+        request.getRequestDispatcher(viewPath).forward(request, response);
 
     }
 
