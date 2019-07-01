@@ -43,4 +43,11 @@ public class ReflectUtil {
         field.setAccessible(true);
         field.set(service, httpRequest);
     }
+
+    public static BaseService getService(HttpServletRequest httpServletRequest) {
+        String uri = httpServletRequest.getRequestURI();
+        int start = uri.lastIndexOf("/");
+        int end = uri.indexOf(".action");
+        String serviceId = uri.substring(start + 1, end);
+    }
 }

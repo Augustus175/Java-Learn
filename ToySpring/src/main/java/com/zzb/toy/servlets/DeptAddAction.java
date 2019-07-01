@@ -12,7 +12,6 @@ public class DeptAddAction extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         System.out.println("accept success !!");
-//        request.getParameter("")
         String viewPath = null;
         BaseService baseService = null;
         try {
