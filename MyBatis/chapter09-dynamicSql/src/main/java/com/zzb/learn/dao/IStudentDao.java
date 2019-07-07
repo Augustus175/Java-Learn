@@ -7,7 +7,7 @@ import java.util.Map;
 
 public interface IStudentDao {
 
-    void insertStudent(Student student);
+    int insertStudent(Student student);
 
     List<Student> selectStudentsByConditionIf(Student student);
 

@@ -23,13 +23,15 @@ public class StudentServiceImpl implements IStudentService {
     }
 
     @Override
-    public void saveStudent(Student student) {
+    public int saveStudent(Student student) {
+        int sqlResult;
         try {
-            dao.insertStudent(student);
+            sqlResult = dao.insertStudent(student);
             sqlSession.commit();
         } finally {
             sqlSession.close();
         }
+        return sqlResult;
     }
 
 

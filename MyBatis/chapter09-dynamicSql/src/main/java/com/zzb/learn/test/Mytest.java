@@ -2,8 +2,8 @@ package com.zzb.learn.test;
 
 
 import com.zzb.learn.bean.Student;
-import com.zzb.learn.service01.IStudentService;
-import com.zzb.learn.service01.StudentServiceImpl;
+import com.zzb.learn.service.IStudentService;
+import com.zzb.learn.service.StudentServiceImpl;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -22,8 +22,9 @@ public class Mytest {
 
     @Test
     public void test1() {
-        Student student = new Student("张四", 20, 93.6);
-        service.saveStudent(student);
+        Student student = new Student("张四", 20);
+        int sqlResult = service.saveStudent(student);
+        System.out.println(sqlResult);
     }
 
 
@@ -33,6 +34,18 @@ public class Mytest {
         student.setName("四");
         student.setAge(23);
         List<Student> students = service.findStudentsByCondition(student);
+        for (Student stu :
+                students) {
+            System.out.println(stu);
+        }
+    }
+
+    @Test
+    public void test7() {
+        Student student = new Student();
+//        student.setName("四");
+        student.setAge(23);
+        List<Student> students = service.findStudentsByConditionWhere(student);
         for (Student stu :
                 students) {
             System.out.println(stu);

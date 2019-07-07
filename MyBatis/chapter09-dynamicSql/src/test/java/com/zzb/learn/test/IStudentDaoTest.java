@@ -38,7 +38,7 @@ public class IStudentDaoTest {
 
     @Test
     public void testSelectStudentsByConditionWhere() {
-        Student student = new Student("四", 23, -1);
+        Student student = new Student("四", 23);
 //        Student student = new Student("四", -1, -1);
 //        Student student = new Student("", -1, -1);
         List<Student> students = dao.selectStudentsByConditionWhere(student);
@@ -52,7 +52,7 @@ public class IStudentDaoTest {
     public void testSelectStudentsByConditionChoose() {
 //        Student student = new Student("四", 23, -1);
 //        Student student = new Student("四", -1, -1);
-        Student student = new Student("", 23, -1);
+        Student student = new Student("", 23);
 //        Student student = new Student("", -1, -1);
         List<Student> students = dao.selectStudentsByConditionChoose(student);
         for (Student stu :
