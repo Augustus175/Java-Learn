@@ -1,11 +1,11 @@
 package com.zzb.toy.util;
 
-import com.sun.deploy.net.HttpRequest;
 import com.zzb.toy.service.BaseService;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -19,7 +19,8 @@ public class ReflectUtil {
         int start = uri.lastIndexOf("/");
         int end = uri.indexOf(".action");
         String serviceId = uri.substring(start + 1, end);
-        String xmlPath = httpServletRequest.getSession().getServletContext().getRealPath("WEB-INF/config/beans-config.xml");
+        ServletContext application = httpServletRequest.getSession().getServletContext();
+        String xmlPath = application.getRealPath("WEB-INF/config/beans-config.xml");
         InputStream in = new FileInputStream(xmlPath);
         SAXReader saxReader = new SAXReader();
         Document document = saxReader.read(in);
@@ -27,7 +28,9 @@ public class ReflectUtil {
         Element beanObj = (Element) document.selectSingleNode(xPath);
         String classPath = beanObj.attributeValue("class");
         Class classObj = Class.forName(classPath);
-        return (BaseService) classObj.newInstance();
+        BaseService serviceObj = (BaseService) classObj.newInstance();
+        application.setAttribute(serviceId, serviceObj);
+        return serviceObj;
     }
 
     public static String invoke(BaseService serviceObject, HttpServletRequest request) throws Exception {
@@ -49,5 +52,12 @@ public class ReflectUtil {
         int start = uri.lastIndexOf("/");
         int end = uri.indexOf(".action");
         String serviceId = uri.substring(start + 1, end);
+        ServletContext application = httpServletRequest.getSession().getServletContext();
+        Object obj = application.getAttribute(serviceId);
+        if (null == obj) {
+            return null;
+        } else {
+            return (BaseService) obj;
+        }
     }
 }
