@@ -2,6 +2,7 @@ package com.zzb.toy.util;
 
 import com.zzb.toy.dao.BaseDao;
 import com.zzb.toy.service.BaseService;
+import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -12,6 +13,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Calendar;
 
 public class ReflectUtil {
 
@@ -63,6 +65,25 @@ public class ReflectUtil {
     }
 
     public static void initDao(BaseService service, HttpServletRequest request) throws Exception {
-
+        Class classObj = service.getClass();
+        ServletContext application = request.getSession().getServletContext();
+        String xmlPath = application.getRealPath("WEB-INF/config/beans-config.xml");
+        InputStream in = new FileInputStream(xmlPath);
+        SAXReader saxReader = new SAXReader();
+        Document document = saxReader.read(in);
+        String classPath = classObj.getName();
+        String xPath = "//bean[@id='" + classPath + "']";
+        Element beanObj = (Element) document.selectSingleNode(xPath);
+        Element propertyObj = beanObj.element("property");
+        String fieldName = propertyObj.attributeValue("name");
+        String daoId = propertyObj.attributeValue("ref");
+        xPath = "//bean[@id='" + daoId + "']";
+        beanObj = (Element) document.selectSingleNode(xPath);
+        String daoClassPath = beanObj.attributeValue("class");
+        Class daoClassObj = Class.forName(daoClassPath);
+        BaseDao daoObj = (BaseDao) daoClassObj.newInstance();
+        Field fieldObj = classObj.getDeclaredField(fieldName);
+        fieldObj.setAccessible(true);
+        fieldObj.set(service, daoObj);
     }
 }
