@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <beans>
-    <bean id="empService" class="com.zzb.toy.service.EmpService"></bean>
+    <bean id="empDao" class="com.zzb.toy.dao.EmpDao"></bean>
+    <bean id="empService" class="com.zzb.toy.service.EmpService">
+        <property name="dao" ref="empDao"></property>
+    </bean>
     <bean id="deptService" class="com.zzb.toy.service.DeptService"></bean>
 </beans>

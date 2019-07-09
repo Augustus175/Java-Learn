@@ -1,5 +1,6 @@
 package com.zzb.toy.util;
 
+import com.zzb.toy.dao.BaseDao;
 import com.zzb.toy.service.BaseService;
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -59,5 +60,9 @@ public class ReflectUtil {
         } else {
             return (BaseService) obj;
         }
+    }
+
+    public static void initDao(BaseService service, HttpServletRequest request) throws Exception {
+
     }
 }
