@@ -1,6 +1,7 @@
 package com.zzb.toy.servlets;
 
 import com.zzb.toy.service.BaseService;
+import com.zzb.toy.service.EmpService;
 import com.zzb.toy.util.ReflectUtil;
 
 import java.io.IOException;
@@ -33,10 +34,10 @@ public class DeptAddAction extends HttpServlet {
             baseService = ReflectUtil.getService(request);
             if (null == baseService) {
                 baseService = ReflectUtil.createService(request);
+                ReflectUtil.initDao(baseService, request);
             }
             ReflectUtil.initRequest(baseService, request);
             viewPath = ReflectUtil.invoke(baseService, request);
-            System.out.println("serviceObj : " + baseService);
         } catch (Exception e) {
             e.printStackTrace();
         }

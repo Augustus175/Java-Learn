@@ -7,6 +7,7 @@ public class EmpService extends ContextAction implements BaseService {
 
     public String save() {
         System.out.println("-------run EmpService save-------");
+        dao.save();
         return "success.jsp";
     }
 
@@ -14,5 +15,13 @@ public class EmpService extends ContextAction implements BaseService {
         System.out.println("param : " + request.getParameter("param"));
         System.out.println("-------run EmpService delete-------");
         return "success.jsp";
+    }
+
+    public BaseDao getDao() {
+        return dao;
+    }
+
+    public void setDao(BaseDao dao) {
+        this.dao = dao;
     }
 }

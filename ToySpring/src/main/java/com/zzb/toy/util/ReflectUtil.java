@@ -2,18 +2,18 @@ package com.zzb.toy.util;
 
 import com.zzb.toy.dao.BaseDao;
 import com.zzb.toy.service.BaseService;
-import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.Calendar;
+import java.util.Enumeration;
 
 public class ReflectUtil {
 
@@ -55,7 +55,9 @@ public class ReflectUtil {
         int start = uri.lastIndexOf("/");
         int end = uri.indexOf(".action");
         String serviceId = uri.substring(start + 1, end);
-        ServletContext application = httpServletRequest.getSession().getServletContext();
+        HttpSession session = httpServletRequest.getSession();
+        ServletContext application = session.getServletContext();
+//                httpServletRequest.getSession().getServletContext();
         Object obj = application.getAttribute(serviceId);
         if (null == obj) {
             return null;
@@ -72,7 +74,7 @@ public class ReflectUtil {
         SAXReader saxReader = new SAXReader();
         Document document = saxReader.read(in);
         String classPath = classObj.getName();
-        String xPath = "//bean[@id='" + classPath + "']";
+        String xPath = "//bean[@class='" + classPath + "']";
         Element beanObj = (Element) document.selectSingleNode(xPath);
         Element propertyObj = beanObj.element("property");
         String fieldName = propertyObj.attributeValue("name");
