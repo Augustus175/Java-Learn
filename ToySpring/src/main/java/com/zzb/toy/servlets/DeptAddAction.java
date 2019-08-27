@@ -1,6 +1,7 @@
 package com.zzb.toy.servlets;
 
 import com.zzb.toy.service.BaseService;
+import com.zzb.toy.service.EmpService;
 import com.zzb.toy.util.ReflectUtil;
 
 import java.io.IOException;
@@ -10,12 +11,31 @@ import javax.servlet.http.HttpServletResponse;
 
 public class DeptAddAction extends HttpServlet {
 
+//    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, IOException {
+//        System.out.println("accept success !!");
+//        String viewPath = null;
+//        BaseService baseService = null;
+//        try {
+//            baseService = ReflectUtil.createService(request);
+//            ReflectUtil.initRequest(baseService, request);
+//            viewPath = ReflectUtil.invoke(baseService, request);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        request.getRequestDispatcher(viewPath).forward(request, response);
+//
+//    }
+
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         System.out.println("accept success !!");
         String viewPath = null;
-        BaseService baseService = null;
+        BaseService baseService;
         try {
-            baseService = ReflectUtil.createService(request);
+            baseService = ReflectUtil.getService(request);
+            if (null == baseService) {
+                baseService = ReflectUtil.createService(request);
+                ReflectUtil.initDao(baseService, request);
+            }
             ReflectUtil.initRequest(baseService, request);
             viewPath = ReflectUtil.invoke(baseService, request);
         } catch (Exception e) {
@@ -24,6 +44,7 @@ public class DeptAddAction extends HttpServlet {
         request.getRequestDispatcher(viewPath).forward(request, response);
 
     }
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws javax.servlet.ServletException, IOException {
         doPost(request, response);

@@ -1,16 +1,19 @@
 package com.zzb.toy.util;
 
-import com.sun.deploy.net.HttpRequest;
+import com.zzb.toy.dao.BaseDao;
 import com.zzb.toy.service.BaseService;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Enumeration;
 
 public class ReflectUtil {
 
@@ -19,7 +22,8 @@ public class ReflectUtil {
         int start = uri.lastIndexOf("/");
         int end = uri.indexOf(".action");
         String serviceId = uri.substring(start + 1, end);
-        String xmlPath = httpServletRequest.getSession().getServletContext().getRealPath("WEB-INF/config/beans-config.xml");
+        ServletContext application = httpServletRequest.getSession().getServletContext();
+        String xmlPath = application.getRealPath("WEB-INF/config/beans-config.xml");
         InputStream in = new FileInputStream(xmlPath);
         SAXReader saxReader = new SAXReader();
         Document document = saxReader.read(in);
@@ -27,7 +31,9 @@ public class ReflectUtil {
         Element beanObj = (Element) document.selectSingleNode(xPath);
         String classPath = beanObj.attributeValue("class");
         Class classObj = Class.forName(classPath);
-        return (BaseService) classObj.newInstance();
+        BaseService serviceObj = (BaseService) classObj.newInstance();
+        application.setAttribute(serviceId, serviceObj);
+        return serviceObj;
     }
 
     public static String invoke(BaseService serviceObject, HttpServletRequest request) throws Exception {
@@ -49,5 +55,37 @@ public class ReflectUtil {
         int start = uri.lastIndexOf("/");
         int end = uri.indexOf(".action");
         String serviceId = uri.substring(start + 1, end);
+        HttpSession session = httpServletRequest.getSession();
+        ServletContext application = session.getServletContext();
+//                httpServletRequest.getSession().getServletContext();
+        Object obj = application.getAttribute(serviceId);
+        if (null == obj) {
+            return null;
+        } else {
+            return (BaseService) obj;
+        }
+    }
+
+    public static void initDao(BaseService service, HttpServletRequest request) throws Exception {
+        Class classObj = service.getClass();
+        ServletContext application = request.getSession().getServletContext();
+        String xmlPath = application.getRealPath("WEB-INF/config/beans-config.xml");
+        InputStream in = new FileInputStream(xmlPath);
+        SAXReader saxReader = new SAXReader();
+        Document document = saxReader.read(in);
+        String classPath = classObj.getName();
+        String xPath = "//bean[@class='" + classPath + "']";
+        Element beanObj = (Element) document.selectSingleNode(xPath);
+        Element propertyObj = beanObj.element("property");
+        String fieldName = propertyObj.attributeValue("name");
+        String daoId = propertyObj.attributeValue("ref");
+        xPath = "//bean[@id='" + daoId + "']";
+        beanObj = (Element) document.selectSingleNode(xPath);
+        String daoClassPath = beanObj.attributeValue("class");
+        Class daoClassObj = Class.forName(daoClassPath);
+        BaseDao daoObj = (BaseDao) daoClassObj.newInstance();
+        Field fieldObj = classObj.getDeclaredField(fieldName);
+        fieldObj.setAccessible(true);
+        fieldObj.set(service, daoObj);
     }
 }
