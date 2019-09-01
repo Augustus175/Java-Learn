@@ -1,6 +1,6 @@
 package com.zzb.designmode.state2;
 
-public class MySwicher {
+public class MyState {
 
     public static void main(String[] args) {
         Switcher switcher = new Switcher();
